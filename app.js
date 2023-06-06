@@ -39,6 +39,9 @@ app.post("/stuff", (req, res) => {
 app.get("/stuff", (req, res) => {
   res.json(stuff);
 });
+app.get("/", (req, res) => {
+  "Hello World";
+});
 
 const clients = [];
 app.get("/sse", (req, res) => {
