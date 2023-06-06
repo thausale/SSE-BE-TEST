@@ -66,12 +66,17 @@ app.get("/sse", (req, res) => {
 
   sendToAllClients();
 
+  const heartbeatInterval = setInterval(() => {
+    res.write(": heartbeat\n");
+  }, 5000);
+
   req.on("close", () => {
     console.log(`Connection closed from ${client.name}.`);
     clients.splice(
       clients.findIndex((c) => c.time === client.time),
       1
     );
+    clearInterval(heartbeatInterval); // Clear the heartbeat interval when the connection is closed
   });
 });
 
