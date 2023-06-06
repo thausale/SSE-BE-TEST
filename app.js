@@ -67,7 +67,8 @@ app.get("/sse", (req, res) => {
   sendToAllClients();
 
   const heartbeatInterval = setInterval(() => {
-    res.write(": heartbeat\n");
+    res.write(`event: heartbeat\n`);
+    res.write("data: heartbeat\n\n");
   }, 5000);
 
   req.on("close", () => {
